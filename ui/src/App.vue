@@ -106,7 +106,7 @@
         </el-card>
 
         <!-- 菜品列表区域 -->
-        <el-card class="menu-section" shadow="hover" style="overflow:auto">
+        <el-card class="menu-section" shadow="hover">
           <template #header>
             <div class="card-header">
               <span>菜品列表</span>
@@ -352,9 +352,16 @@ export default {
 </script>
 
 <style>
-/* 主容器样式 */
+/* 页面基础：让滚动交给浏览器外层，避免内层出现小滚动条 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+}
+
+/* 主容器样式：用 min-height 而不是 height，内容多时能自然撑开 */
 .main-container {
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -370,13 +377,14 @@ export default {
 }
 
 /* 主内容区域 */
+/* el-main 自带 overflow:auto，会把内容关进内层滚动条里，这里改成 visible 交给页面滚动 */
 .main-content {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   background-color: #f5f7fa;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 /* 卡片头部 */
@@ -417,11 +425,14 @@ export default {
   box-sizing: border-box;
 }
 
+/* 长地址、长英文串不换行会撑破卡片，这里强制折行 */
 .formatted-content {
   width: 100%;
   line-height: 1.6;
   font-size: 15px;
   color: #333;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .formatted-content h1,
@@ -612,9 +623,10 @@ export default {
   border-color: #409EFF;
 }
 
+/* 不能用 overflow:hidden，否则 AI 回复过长时下半截会被直接裁掉 */
 .chat-section {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .chat-response {
