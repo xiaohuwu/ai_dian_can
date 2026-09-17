@@ -1,0 +1,23 @@
+# 环境变量与本地密钥
+.env
+.env.*
+!.env.example
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# 前端依赖与构建产物
+ui/node_modules/
+ui/dist/
+
+# 编辑器与系统文件
+.idea/
+.vscode/
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
